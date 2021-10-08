@@ -1,0 +1,35 @@
+{
+  "name": "@treecg/types",
+  "version": "0.0.1",
+  "description": "TypeScript types for working with TREE/LDES",
+  "types": "index.d.js",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "test": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@types/node": "*",
+    "@rdfjs/types": "*"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "eslint": "^7.12.0",
+    "typescript": "^4.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TREEcg/types.git"
+  },
+  "keywords": [
+    "tree",
+    "ldes",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TREEcg/types/issues"
+  },
+  "homepage": "https://github.com/TREEcg/types#readme"
+}
