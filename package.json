@@ -5,7 +5,11 @@
   "types": "index.d.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "test": "tsc --noEmit"
+    "test": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "prepublishOnly": "npm test && npm run build",
+    "release": "npm publish --access public"
   },
   "dependencies": {
     "@types/node": "*",
@@ -27,7 +31,7 @@
     "typescript"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSE",
   "bugs": {
     "url": "https://github.com/TREEcg/types/issues"
   },
