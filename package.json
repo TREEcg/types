@@ -1,6 +1,6 @@
 {
   "name": "@treecg/types",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TypeScript types for working with TREE/LDES",
   "types": "index.d.js",
   "scripts": {
