@@ -12,8 +12,13 @@
     "release": "npm publish --access public"
   },
   "dependencies": {
+    "@rdfjs/dataset": "^1.1.1",
+    "@rdfjs/types": "*",
     "@types/node": "*",
-    "@rdfjs/types": "*"
+    "clownface": "^1.4.0",
+    "clownface-shacl-path": "^1.2.2",
+    "n3": "^1.11.1",
+    "rdf-data-factory": "^1.1.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.5.0",
