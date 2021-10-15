@@ -21,6 +21,7 @@
     "rdf-data-factory": "^1.1.0"
   },
   "devDependencies": {
+    "@types/clownface": "^1.2.5",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "eslint": "^7.12.0",
