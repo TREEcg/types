@@ -76,4 +76,6 @@ export abstract class Bucketizer {
   public addHypermediaControls = (bucket: string, controls: string[]): void => {
     this.bucketHypermediaControlsMap.set(bucket, controls);
   };
+
+  public getPropertyPathQuads = (): RDF.Quad[] => this.propertyPathQuads;
 }
