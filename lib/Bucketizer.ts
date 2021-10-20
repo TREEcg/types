@@ -45,7 +45,7 @@ export abstract class Bucketizer {
   /**
    * Selects the bucket for the LDES member based on the value of the property path object
    */
-  public abstract createBuckets: (propertyPathObject: RDF.Term[]) => string[];
+  protected abstract createBuckets: (propertyPathObject: RDF.Term[]) => string[];
 
   /**
    * Returns the RDF Term that matches the property path and will be used to create a bucket triple
@@ -53,14 +53,14 @@ export abstract class Bucketizer {
    * @param memberId identifier of the member
    * @returns an RDF Term
    */
-  public extractPropertyPathObject = (memberQuads: RDF.Quad[], memberId: string): RDF.Term[] => {
+  protected extractPropertyPathObject = (memberQuads: RDF.Quad[], memberId: string): RDF.Term[] => {
     const entryBlankNode = this.getEntryBlanknode().object;
     const data = clownface({ dataset: dataset(memberQuads) }).namedNode(memberId);
     const path = clownface({ dataset: dataset(this.propertyPathQuads) }).blankNode(entryBlankNode);
     return findNodes(data, path).terms;
   };
 
-  public createBucketTriple = (bucket: string, memberId: string): RDF.Quad => this.factory.quad(
+  protected createBucketTriple = (bucket: string, memberId: string): RDF.Quad => this.factory.quad(
     this.factory.namedNode(memberId),
     this.factory.namedNode('https://w3id.org/ldes#bucket'),
     this.factory.literal(bucket, this.factory.namedNode('http://www.w3.org/2001/XMLSchema#string')),
