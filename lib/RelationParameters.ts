@@ -7,7 +7,7 @@ export interface RelationParameters {
   nodeId: string;
   type: RelationType;
   value: RDF.Term[];
-  remainingItems: number;
+  remainingItems?: number;
 }
 
 export enum RelationType {
