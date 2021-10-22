@@ -6,11 +6,12 @@ import type * as RDF from '@rdfjs/types';
 export interface RelationParameters {
   nodeId: string;
   type: RelationType;
-  value: RDF.Term[];
+  value?: RDF.Term[];
   remainingItems?: number;
 }
 
 export enum RelationType {
+  Relation = 'https://w3id.org/tree#SubstringRelation',
   Substring = 'https://w3id.org/tree#SubstringRelation',
   Prefix = 'https://w3id.org/tree#PrefixRelation',
   Suffix = 'https://w3id.org/tree#SuffixRelation',
