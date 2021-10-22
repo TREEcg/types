@@ -1,6 +1,7 @@
 import type * as RDF from '@rdfjs/types';
 import { findNodes } from 'clownface-shacl-path';
 import { DataFactory } from 'rdf-data-factory';
+import { RelationParameters } from './RelationParameters';
 const { dataset } = require('@rdfjs/dataset');
 const clownface = require('clownface');
 const N3 = require('n3');
@@ -9,12 +10,12 @@ export abstract class Bucketizer {
   public readonly propertyPath: string;
   public propertyPathQuads: RDF.Quad[];
   public readonly factory: RDF.DataFactory;
-  private readonly bucketHypermediaControlsMap: Map<string, string[]>;
+  private readonly bucketHypermediaControlsMap: Map<string, RelationParameters[]>;
 
   public constructor(propertyPath: string) {
     this.factory = new DataFactory();
     this.propertyPath = propertyPath;
-    this.bucketHypermediaControlsMap = new Map<string, string[]>();
+    this.bucketHypermediaControlsMap = new Map<string, RelationParameters[]>();
     this.propertyPathQuads = [];
   }
 
@@ -69,11 +70,11 @@ export abstract class Bucketizer {
   private readonly getEntryBlanknode = (): RDF.Quad =>
     this.propertyPathQuads.find(quad => quad.predicate.value === 'https://w3id.org/tree#path')!;
 
-  public getBucketHypermediaControlsMap = (): Map<string, string[]> => this.bucketHypermediaControlsMap;
+  public getBucketHypermediaControlsMap = (): Map<string, RelationParameters[]> => this.bucketHypermediaControlsMap;
 
-  public getHypermediaControls = (bucket: string): string[] | undefined => this.bucketHypermediaControlsMap.get(bucket);
+  public getHypermediaControls = (bucket: string): RelationParameters[] | undefined => this.bucketHypermediaControlsMap.get(bucket);
 
-  public addHypermediaControls = (bucket: string, controls: string[]): void => {
+  public addHypermediaControls = (bucket: string, controls: RelationParameters[]): void => {
     this.bucketHypermediaControlsMap.set(bucket, controls);
   };
 
