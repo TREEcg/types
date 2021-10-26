@@ -11,7 +11,7 @@ export interface RelationParameters {
 }
 
 export enum RelationType {
-  Relation = 'https://w3id.org/tree#SubstringRelation',
+  Relation = 'https://w3id.org/tree#Relation',
   Substring = 'https://w3id.org/tree#SubstringRelation',
   Prefix = 'https://w3id.org/tree#PrefixRelation',
   Suffix = 'https://w3id.org/tree#SuffixRelation',
