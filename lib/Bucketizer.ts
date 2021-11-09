@@ -48,12 +48,6 @@ export abstract class Bucketizer {
   protected abstract createBuckets: (propertyPathObject: RDF.Term[]) => string[];
 
   /**
-   * Creates a bucketizer based on the provided options and an optional previous state.
-   * The implementation should call the 'parsePropertyPath' function if state is not provided
-   */
-  protected abstract build(bucketizerOptions: BucketizerOptions, state?: any): Bucketizer;
-
-  /**
    * Returns the RDF Term that matches the property path and will be used to create a bucket triple
    * @param memberQuads an array of quads representing a member
    * @param memberId identifier of the member
