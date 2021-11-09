@@ -1,27 +1,26 @@
 import type * as RDF from '@rdfjs/types';
 import { findNodes } from 'clownface-shacl-path';
 import { DataFactory } from 'rdf-data-factory';
+import { BucketizerOptions } from '..';
 import { RelationParameters } from './RelationParameters';
 const { dataset } = require('@rdfjs/dataset');
 const clownface = require('clownface');
 const N3 = require('n3');
 
 export abstract class Bucketizer {
-  public readonly propertyPath: string;
-  public propertyPathQuads: RDF.Quad[];
   public readonly factory: RDF.DataFactory;
-  private readonly bucketHypermediaControlsMap: Map<string, RelationParameters[]>;
+  public propertyPathQuads: RDF.Quad[];
+  private bucketHypermediaControlsMap: Map<string, RelationParameters[]>;
 
-  public constructor(propertyPath: string) {
+  public constructor(propertyPathQuads: any[]) {
     this.factory = new DataFactory();
-    this.propertyPath = propertyPath;
     this.bucketHypermediaControlsMap = new Map<string, RelationParameters[]>();
-    this.propertyPathQuads = [];
+    this.propertyPathQuads = propertyPathQuads;
   }
 
-  public init = (): Promise<void> => new Promise((resolve, reject) => {
-    const fullPath = `_:b0 <https://w3id.org/tree#path> ${this.propertyPath} .`;
-    this.propertyPathQuads = [];
+  public parsePropertyPath = (propertyPath: string): Promise<any[]> => new Promise((resolve, reject) => {
+    const fullPath = `_:b0 <https://w3id.org/tree#path> ${propertyPath} .`;
+    const propertyPathQuads: any[] = [];
 
     const parser = new N3.Parser();
     parser.parse(fullPath, (error: any, quad: any, prefixes: any) => {
@@ -30,9 +29,9 @@ export abstract class Bucketizer {
       }
 
       if (quad) {
-        this.propertyPathQuads.push(quad);
+        propertyPathQuads.push(quad);
       } else {
-        resolve();
+        resolve(propertyPathQuads);
       }
     });
   });
@@ -47,6 +46,12 @@ export abstract class Bucketizer {
    * Selects the bucket for the LDES member based on the value of the property path object
    */
   protected abstract createBuckets: (propertyPathObject: RDF.Term[]) => string[];
+
+  /**
+   * Creates a bucketizer based on the provided options and an optional previous state.
+   * The implementation should call the 'parsePropertyPath' function if state is not provided
+   */
+  protected abstract build(bucketizerOptions: BucketizerOptions, state?: any): Bucketizer;
 
   /**
    * Returns the RDF Term that matches the property path and will be used to create a bucket triple
@@ -79,4 +84,16 @@ export abstract class Bucketizer {
   };
 
   public getPropertyPathQuads = (): RDF.Quad[] => this.propertyPathQuads;
+
+  public exportState(): any {
+    return {
+      hypermediaControls: Array.from(this.bucketHypermediaControlsMap.entries()),
+      propertyPathQuads: this.propertyPathQuads
+    }
+  }
+
+  public importState(state: any): void {
+    this.bucketHypermediaControlsMap = new Map(state.hypermediaControls);
+    this.propertyPathQuads = state.propertyPathQuads;
+  }
 }
