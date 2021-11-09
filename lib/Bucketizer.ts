@@ -18,7 +18,7 @@ export abstract class Bucketizer {
     this.propertyPathQuads = propertyPathQuads;
   }
 
-  public parsePropertyPath = (propertyPath: string): Promise<any[]> => new Promise((resolve, reject) => {
+  public static parsePropertyPath = (propertyPath: string): Promise<any[]> => new Promise((resolve, reject) => {
     const fullPath = `_:b0 <https://w3id.org/tree#path> ${propertyPath} .`;
     const propertyPathQuads: any[] = [];
 
