@@ -12,15 +12,14 @@ export abstract class Bucketizer {
   public propertyPathQuads: RDF.Quad[];
   private bucketHypermediaControlsMap: Map<string, RelationParameters[]>;
 
-  public constructor(propertyPathQuads: any[]) {
+  public constructor() {
     this.factory = new DataFactory();
     this.bucketHypermediaControlsMap = new Map<string, RelationParameters[]>();
-    this.propertyPathQuads = propertyPathQuads;
+    this.propertyPathQuads = [];
   }
 
-  public static parsePropertyPath = (propertyPath: string): Promise<any[]> => new Promise((resolve, reject) => {
+  public setPropertyPathQuads = (propertyPath: string): Promise<void> => new Promise((resolve, reject) => {
     const fullPath = `_:b0 <https://w3id.org/tree#path> ${propertyPath} .`;
-    const propertyPathQuads: any[] = [];
 
     const parser = new N3.Parser();
     parser.parse(fullPath, (error: any, quad: any, prefixes: any) => {
@@ -29,9 +28,9 @@ export abstract class Bucketizer {
       }
 
       if (quad) {
-        propertyPathQuads.push(quad);
+        this.propertyPathQuads.push(quad);
       } else {
-        resolve(propertyPathQuads);
+        resolve();
       }
     });
   });
