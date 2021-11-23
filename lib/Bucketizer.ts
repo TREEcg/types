@@ -23,6 +23,8 @@ export abstract class Bucketizer {
     this.bucketlessPageNumber = 0;
     this.bucketlessPageMemberCounter = 0;
     this.bucketizerOptions = bucketizerOptions;
+
+    this.bucketizerOptions.root = this.bucketizerOptions.root || 'root';
   }
 
   public setPropertyPathQuads = (propertyPath: string): Promise<void> => new Promise((resolve, reject) => {
@@ -64,7 +66,9 @@ export abstract class Bucketizer {
       bucketTriples.push(...buckets.map(bucket => this.createBucketTriple(bucket, memberId)));
 
     } catch (error) {
-      console.error(`[Bucketizer]: Error while creating the buckets for member ${memberId}. Applying fallback.`)
+      console.log(`[Bucketizer]: Error while creating the buckets for member ${memberId}. Applying fallback.`)
+      console.log(error);
+
       bucketTriples.push(this.fallback(memberId));
 
     }
@@ -132,15 +136,15 @@ export abstract class Bucketizer {
 
     if (pageSize && this.bucketlessPageMemberCounter === pageSize) {
       const currentPage = this.bucketlessPageNumber;
+      const relationParameters: RelationParameters = {
+        nodeId: `bucketless-${currentPage}`,
+        type: RelationType.Relation
+      }
+
+      this.addHypermediaControls(`${this.bucketizerOptions.root}`, [relationParameters]);
 
       this.bucketlessPageNumber++;
       this.bucketlessPageMemberCounter = 0;
-
-      const relationParameters: RelationParameters = {
-        nodeId: `bucketless-${this.bucketlessPageNumber}`,
-        type: RelationType.Relation
-      }
-      this.addHypermediaControls(`bucketless-${currentPage}`, [relationParameters]);
     }
 
     this.bucketlessPageMemberCounter++;
