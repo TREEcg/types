@@ -1,11 +1,13 @@
 import type * as RDF from '@rdfjs/types';
 import { findNodes } from 'clownface-shacl-path';
 import { DataFactory } from 'rdf-data-factory';
+import { Logger } from 'winston';
 import { BucketizerOptions, RelationType } from '..';
 import { RelationParameters } from './RelationParameters';
 const { dataset } = require('@rdfjs/dataset');
 const clownface = require('clownface');
 const N3 = require('n3');
+import { getLogger } from './utils/Logger';
 
 export abstract class Bucketizer {
   public readonly factory: RDF.DataFactory;
@@ -14,6 +16,7 @@ export abstract class Bucketizer {
   private bucketlessPageNumber: number;
   private bucketlessPageMemberCounter: number;
   public bucketizerOptions: BucketizerOptions;
+  public logger: Logger;
 
   public constructor(bucketizerOptions: BucketizerOptions) {
     this.factory = new DataFactory();
@@ -25,6 +28,7 @@ export abstract class Bucketizer {
     this.bucketizerOptions = bucketizerOptions;
 
     this.bucketizerOptions.root = this.bucketizerOptions.root || 'root';
+    this.logger = getLogger('Bucketizer');
   }
 
   public setPropertyPathQuads = (propertyPath: string): Promise<void> => new Promise((resolve, reject) => {
@@ -52,7 +56,7 @@ export abstract class Bucketizer {
     const propertyPathObjects: RDF.Term[] = this.extractPropertyPathObject(quads, memberId);
 
     if (propertyPathObjects.length <= 0) {
-      console.error(`[Bucketizer]: No matches found for property path "${this.bucketizerOptions.propertyPath}" in member "${memberId}". Applying fallback.`);
+      this.logger.warn(`No matches found for property path "${this.bucketizerOptions.propertyPath}" in member "${memberId}". Applying fallback.`);
 
       const bucketTriple = this.fallback(memberId);
       quads.push(bucketTriple);
@@ -65,12 +69,11 @@ export abstract class Bucketizer {
       const buckets = this.createBuckets(propertyPathObjects);
       bucketTriples.push(...buckets.map(bucket => this.createBucketTriple(bucket, memberId)));
 
-    } catch (error) {
-      console.log(`[Bucketizer]: Error while creating the buckets for member ${memberId}. Applying fallback.`)
-      console.log(error);
+    } catch (error: any) {
+      this.logger.error(`Error while creating the buckets for member ${memberId}. Applying fallback.`);
+      this.logger.info(error);
 
       bucketTriples.push(this.fallback(memberId));
-
     }
 
     quads.push(...bucketTriples);

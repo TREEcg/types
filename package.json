@@ -18,7 +18,8 @@
     "clownface": "^1.4.0",
     "clownface-shacl-path": "^1.2.2",
     "n3": "^1.11.1",
-    "rdf-data-factory": "^1.1.0"
+    "rdf-data-factory": "^1.1.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/clownface": "^1.2.5",
