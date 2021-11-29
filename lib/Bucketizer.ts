@@ -138,16 +138,18 @@ export abstract class Bucketizer {
     const pageSize = this.bucketizerOptions.pageSize;
 
     if (pageSize && this.bucketlessPageMemberCounter === pageSize) {
-      const currentPage = this.bucketlessPageNumber;
+      this.bucketlessPageNumber++;
+      this.bucketlessPageMemberCounter = 0;
+    }
+
+    const rootHypermediaControls = this.getHypermediaControls(this.bucketizerOptions.root!);
+    if (!rootHypermediaControls || rootHypermediaControls.some(parameter => parameter.nodeId === `bucketless-${this.bucketlessPageNumber}`)) {
       const relationParameters: RelationParameters = {
-        nodeId: `bucketless-${currentPage}`,
+        nodeId: `bucketless-${this.bucketlessPageNumber}`,
         type: RelationType.Relation
       }
 
       this.addHypermediaControls(`${this.bucketizerOptions.root}`, [relationParameters]);
-
-      this.bucketlessPageNumber++;
-      this.bucketlessPageMemberCounter = 0;
     }
 
     this.bucketlessPageMemberCounter++;
