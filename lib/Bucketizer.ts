@@ -143,7 +143,7 @@ export abstract class Bucketizer {
     }
 
     const rootHypermediaControls = this.getHypermediaControls(this.bucketizerOptions.root!);
-    if (!rootHypermediaControls || rootHypermediaControls.some(parameter => parameter.nodeId === `bucketless-${this.bucketlessPageNumber}`)) {
+    if (!rootHypermediaControls || !rootHypermediaControls.some(parameter => parameter.nodeId === `bucketless-${this.bucketlessPageNumber}`)) {
       const relationParameters: RelationParameters = {
         nodeId: `bucketless-${this.bucketlessPageNumber}`,
         type: RelationType.Relation
