@@ -13,8 +13,12 @@
         "noEmit": false,
         "forceConsistentCasingInFileNames": true,
         "declaration": true,
+        "outDir": "dist",
     },
     "files": [
         "index.ts",
-    ]
+    ],
+    "exclude": [
+        "node_modules",
+    ],
 }
