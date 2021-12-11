@@ -116,6 +116,10 @@ export abstract class Bucketizer {
 
   public getPropertyPathQuads = (): RDF.Quad[] => this.propertyPathQuads;
 
+  public getRoot(): string {
+    return this.bucketizerOptions.root || 'root';
+  }
+
   public exportState(): any {
     return {
       hypermediaControls: Array.from(this.bucketHypermediaControlsMap.entries()),
