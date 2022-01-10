@@ -1,13 +1,12 @@
 import type * as RDF from '@rdfjs/types';
 import { findNodes } from 'clownface-shacl-path';
 import { DataFactory } from 'rdf-data-factory';
-import { Logger } from 'winston';
 import { BucketizerOptions, RelationType } from '..';
 import { RelationParameters } from './RelationParameters';
 const { dataset } = require('@rdfjs/dataset');
 const clownface = require('clownface');
 const N3 = require('n3');
-import { getLogger } from './utils/Logger';
+import { getLogger , Logger} from './utils/Logger';
 
 export abstract class Bucketizer {
   public readonly factory: RDF.DataFactory;
