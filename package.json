@@ -1,7 +1,8 @@
 {
   "name": "@treecg/types",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "TypeScript types for working with TREE/LDES",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "lint": "eslint . --ext .ts",
