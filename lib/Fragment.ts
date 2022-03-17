@@ -1,4 +1,3 @@
-import type * as RDF from '@rdfjs/types';
 import { Member } from './Member';
 import { RelationParameters } from './RelationParameters';
 

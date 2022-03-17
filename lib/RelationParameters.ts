@@ -5,9 +5,9 @@ import type * as RDF from '@rdfjs/types';
  */
 export interface RelationParameters {
   nodeId: string;
-  type?: RelationType;
-  value?: RDF.Term;
-  path?: RDF.Quad_Predicate;
+  type: RelationType;
+  value?: RDF.Term[];
+  path?: RDF.Term;
   remainingItems?: number;
 }
 
