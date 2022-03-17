@@ -1,4 +1,6 @@
 export * from './lib/Member';
+export * from './lib/Fragment'
+export * from './lib/Stream'
 export * from './lib/Bucketizer';
 export * from './lib/BucketizerOptions';
 export * from './lib/RelationParameters';
