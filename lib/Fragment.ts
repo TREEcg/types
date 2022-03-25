@@ -1,8 +1,11 @@
 import { Member } from './Member';
 import { RelationParameters } from './RelationParameters';
 
-// To be determined
-export type CacheDirectives = any; 
+export interface CacheDirectives {
+    pub: boolean;
+    maxAge?: number;
+    immutable?: boolean;
+}
 
 // To be determined
 export type Metadata = any;
