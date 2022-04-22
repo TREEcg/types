@@ -9,7 +9,6 @@
     "test": "tsc --noEmit",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
-    "preinstall": "npm run build",
     "prepublishOnly": "npm test && npm run build",
     "release": "npm publish --access public"
   },
