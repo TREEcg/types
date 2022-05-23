@@ -13,7 +13,7 @@
     "release": "npm publish --access public"
   },
   "dependencies": {
-    "@rdfjs/dataset": "^1.1.1",
+    "@rdfjs/dataset": "^2.0.1",
     "@rdfjs/types": "*",
     "@types/node": "*",
     "clownface": "^1.4.0",
