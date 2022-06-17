@@ -1,3 +1,4 @@
+import { Term } from '@rdfjs/types';
 import { Member } from './Member';
 import { RelationParameters } from './RelationParameters';
 
@@ -7,14 +8,10 @@ export interface CacheDirectives {
     immutable?: boolean;
 }
 
-// To be determined
-export type Metadata = any;
-
 // A fragment encapsulating multiple members
 // and relations to other Fragments.
 // Also indicating some metadata and cache directives 
 export interface Fragment {
-    metadata: Metadata;
     cache: CacheDirectives;
     members: Array<Member>;
     relations: Array<RelationParameters>
@@ -22,5 +19,5 @@ export interface Fragment {
 
 // Fetches a fragment beloning to the identifier
 export interface FragmentFetcher {
-    fetch(id: string): Promise<Fragment>;
+    fetch(id: string, timestampCapable: boolean, timestampPath?: Term): Promise<Fragment>;
 }
