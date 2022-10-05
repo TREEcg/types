@@ -124,6 +124,15 @@ export const SDS = createUriAndTermNamespace('https://w3id.org/sds#',
   'carries',
   'dataset',
   'Stream',
+
+  'payload',
+  'bucket',
+  'relationType',
+  'relationBucket',
+  'relationValue',
+  'relationPath',
+  'stream',
+  'relation',
 );
 
 export const PROV = createUriAndTermNamespace('http://www.w3.org/ns/prov#',
