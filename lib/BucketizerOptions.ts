@@ -2,13 +2,15 @@ import { Quad } from "@rdfjs/types";
 
 /**
  * All bucketizers need these options
- * Some bucketizers like simple paging bucketizer only need these options 
+ * Some bucketizers like simple paging bucketizer only need these options
  */
 export interface BucketizerCoreOptions {
   /** property to create with bucket index */
   bucketProperty: string,
   /** amount of members per bucket */
   pageSize: number,
+  /** bucket prefix   */
+  bucketBase: string
 }
 
 /**
