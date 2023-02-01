@@ -70,9 +70,21 @@ export const FOAF = createUriAndTermNamespace('http://xmlns.com/foaf/0.1/',
 
 export const RDF = createUriAndTermNamespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#',
   'type',
+  'Class',
+  'Property',
   'nil',
   'rest',
-  'first'
+  'first',
+);
+
+export const RDFS = createUriAndTermNamespace('http://www.w3.org/2000/01/rdf-schema#',
+    'label',
+    'comment',
+    'domain',
+    'range',
+    'isDefinedBy',
+    'Class',
+    'subClassOf'
 );
 
 export const XSD = createUriAndTermNamespace('http://www.w3.org/2001/XMLSchema#',
@@ -148,10 +160,25 @@ export const SHACL = createUriAndTermNamespace('http://www.w3.org/ns/shacl#',
   'targetClass',
   'property',
   'path',
+  'name',
+  ':alternativePath',
   'datatype',
   'nodeKind',
+  'pattern',
+  'flags',
+  'minExclusive',
+  'minInclusive',
+  'maxExclusive',
+  'maxInclusive',
+  'not',
+  'and',
+  'or',
+  'xone',
+  'in',
+  'hasValue',
+  'defaultValue',
   'minCount',
-  'maxCount',
+  'maxCount'
 );
 export const EX = createUriAndTermNamespace('http://example.org/ns#',
 );
