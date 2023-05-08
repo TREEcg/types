@@ -14,10 +14,7 @@
   },
   "dependencies": {
     "@rdfjs/types": "*",
-    "loglevel": "^1.8.0",
-    "loglevel-plugin-prefix": "^0.8.4",
-    "rdf-data-factory": "^1.1.0",
-    "winston": "^3.3.3"
+    "rdf-data-factory": "^1.1.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.5.0",
